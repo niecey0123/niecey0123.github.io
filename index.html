@@ -1,1 +1,58 @@
-Hello World
+<!doctype html>
+
+<html lang="en">
+<head>
+  
+
+  <title>The Earth</title>
+  
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <link rel="stylesheet" href="./css/style.css">
+
+</head>
+<h1>Movie Info</h1>
+<dl>
+  <dt>Title</dt>
+  <dd id="title"></dd>
+
+  <dt>Year</dt>
+  <dd id="year"></dd>
+
+  <dt>Rated</dt>
+  <dd id="rated"></dd>
+</dl>
+<form>
+  <input type="text" placeholder="movie title"/>
+  <input type="submit" value="Get Movie Info"/>
+</form>
+
+<body>
+<script type="text/javascript">
+
+$(()=> {
+    $('form').on('submit' ,(event)=>{
+        event.preventDefault();
+
+        const UserInput = $('input[type="text]').val();
+
+    $.ajax({
+          url:'http://www.omdbapi.com/?apikey=53aa2cd6&t=Frozen'
+       }).then(
+            (data)=>{
+              console.log(data);
+              $("#title").html(data.Title)
+              $("#year").html(data.Year)
+              $("#rated").html(data.Rated)
+            },
+            ()=>{
+              console.log('404 Bad Request');
+            }
+        );
+  
+    })
+})
+
+
+</script>
+</body>
+</html>
